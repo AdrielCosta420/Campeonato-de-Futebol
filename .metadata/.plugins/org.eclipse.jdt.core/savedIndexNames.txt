@@ -1,0 +1,2 @@
+INDEX VERSION 1.134+C:\Users\Adriel\PROJECTS\JAVA_PROJECTS\AV3DAC\Campeonato\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
