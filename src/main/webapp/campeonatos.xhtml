@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+<h:body>
+	<h:dataTable id="tabela" value="#{campeonatoBean.campeonatos}" var="campeonato"
+			editable="true" selectionMode="single" rowKey="campeonato.id}">
+	
+		<p:column headerText="ID">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{campeonato.id}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:inputText value="#{campeonato.id}" disabled="true" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			
+			<p:column headerText="Nome">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{campeonato.nome}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:inputText value="#{campeonato.nome}" disabled="true" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+	</h:dataTable>
+</h:body>
+
+</html>

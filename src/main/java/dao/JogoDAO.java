@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import entities.Jogo;
 import util.JPAUtil;
@@ -58,9 +59,18 @@ public class JogoDAO {
 	public static List<Jogo> listar() {
 		EntityManager em = JPAUtil.criarEntityManager();
 		
-		Query q = em.createQuery("FROM Jogo", Jogo.class);
+		Query q = em.createQuery("SELECT j FROM Jogo j", Jogo.class);
 		List<Jogo> lista = q.getResultList();
 		em.clear();
 		return lista;
 	}
+	
+	public static List<Jogo> findByTeam(String team) {
+		EntityManager em = JPAUtil.criarEntityManager();
+        
+        TypedQuery<Jogo> query = em.createNamedQuery("Jogo.findByTeam", Jogo.class);
+        query.setParameter("team", team);
+      
+        return query.getResultList();
+    }
 }

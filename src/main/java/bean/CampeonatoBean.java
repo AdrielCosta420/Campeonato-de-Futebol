@@ -15,7 +15,8 @@ import entities.Campeonato;
 public class CampeonatoBean {
 	private Campeonato campeonato = new Campeonato();
 	private List<Campeonato> campeonatos;
-
+	
+	
 	public Campeonato getCampeonato() {
 		return campeonato;
 	}
@@ -42,8 +43,8 @@ public class CampeonatoBean {
 			campeonato = new Campeonato();
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "Campeonato criado!"));
-		//	campeonatos = CampeonatoDAO.listar();
-			return null;
+			campeonatos = CampeonatoDAO.listar();
+			return "listagem.xhtml";
 		}
 		return null;
 
