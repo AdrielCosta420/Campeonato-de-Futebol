@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import dao.CampeonatoDAO;
@@ -18,7 +18,7 @@ import entities.Jogo;
 import entities.Resume;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class JogoBean {
 	private Jogo jogo = new Jogo();
 	private List<Jogo> lista;
@@ -26,6 +26,15 @@ public class JogoBean {
 	private List<Resume> resumos;
 	private String selectedTeam;
 	private List<Jogo> filteredGames;
+	private Date dataAtual = new Date();
+
+	public Date getDataAtual() {
+		return dataAtual;
+	}
+
+	public void setDataAtual(Date dataAtual) {
+		this.dataAtual = dataAtual;
+	}
 
 	public String getSelectedTeam() {
 		return selectedTeam;
@@ -87,6 +96,7 @@ public class JogoBean {
 	public void init() {
 		campeonatos = CampeonatoDAO.listar();
 		lista = JogoDAO.listar();
+
 	}
 
 	public String save() {
@@ -108,29 +118,27 @@ public class JogoBean {
 		return null;
 	}
 
-	public String edit(Jogo jogoEdit) {
+	public void edit(Jogo jogoEdit) {
 		if (jogoEdit != null) {
 			if (jogoEdit.getTime1().equals(jogoEdit.getTime2())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Times não podem ser iguais."));
-				return null;
+
 			}
 			JogoDAO.edit(jogoEdit);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "Jogo atualizado!"));
-			lista = JogoDAO.listar();
-			return "listagem.xhtml";
+			//lista = JogoDAO.listar();
+
 		}
-		return null;
+
 	}
 
-	public String delete(int id) {
-
+	public void delete(Integer id) {
+		
 		JogoDAO.delete(id);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!", "Jogo excluído!"));
-		lista = JogoDAO.listar();
-		return "listagem.xthml";
 	}
 
 	public String filterGames() {
@@ -141,6 +149,7 @@ public class JogoBean {
 		}
 		return null;
 	}
+	
 
 	private void calcularResumos() {
 		Map<String, Resume> mapResumos = new HashMap<>();

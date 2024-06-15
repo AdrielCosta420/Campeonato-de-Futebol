@@ -11,20 +11,22 @@
 </h:head>
 
 <h:body style="background-color: #e9ecff">
-	<h:form id="form">
+	<h:form id="form" >
 
 		<p:messages id="messages" showDetail="true" closable="true">
 			<p:autoUpdate />
 		</p:messages>
+	
+	
+	<h:outputLink value="index.xhtml">Voltar</h:outputLink>
 
-
-
+	
 		<p:dataTable id="tabela" value="#{jogoBean.lista}" var="jogo"
 			editable="true" selectionMode="single" rowKey="#{jogo.id}">
 
 
 			<p:ajax event="rowEdit" listener="#{jogoBean.edit(jogo)}"
-				update=":form:tabela" />
+				update=":form:tabela, :form:messages" />
 				
 				
 			<p:column headerText="Editar">
@@ -122,7 +124,7 @@
 			<p:column headerText="Excluir">
 				<p:commandButton style="background-color:red" icon="pi pi-trash"
 					title="Excluir" actionListener="#{jogoBean.delete(jogo.id)}"
-					update=":form:tabela" />
+					update=":form:tabela, :form:messages" />
 			</p:column>
 			
 			
@@ -163,11 +165,11 @@
 			</h:panelGroup>
 		</p:dialog>
 
-
-		<br />
-		<h:outputLink value="index.xhtml">Filtragem</h:outputLink>
-		<p:commandButton value="Resumo" update="resumoPanel"
-			action="filtro.xhtml" icon="search" />
+<br></br>
+		
+		<h:outputLink value="filtro.xhtml">Filtragem</h:outputLink>
+		
+		
 	</h:form>
 </h:body>
 </html>

@@ -11,11 +11,15 @@
 	<title>Cadastro de Jogo</title>
 </h:head>
 <h:body style="background-color: #e9ecff">
+
+	<h1 style="font-family: Arial, sans-serif; font-weight: 600;">Crie
+		os melhores jogos!</h1>
 	<h:form>
 		<p:messages id="messages" showDetail="true" closable="true">
 			<p:autoUpdate />
 		</p:messages>
-		<h:panelGrid columns="2" cellpadding="5">
+		<h:panelGrid columns="6" cellpadding="5"
+			style=" width: 45%; border: 2px solid #669bbc;">
 
 
 			<h:outputLabel for="time1" value="Time 1:" />
@@ -39,7 +43,7 @@
 			<h:outputLabel for="campeonato" value="Campeonato:" />
 
 			<h:selectOneMenu id="campeonato" value="#{jogoBean.jogo.campeonato}"
-				required="true" converter="converter.CampeonatoConverter">
+				required="true" requiredMessage="Campo obrigatório" converter="converter.CampeonatoConverter">
 				<f:selectItems value="#{campeonatoBean.campeonatos}"
 					var="campeonato" itemLabel="#{campeonato.nome}"
 					itemValue="#{campeonato}" />
@@ -47,25 +51,29 @@
 
 			<h:outputLabel for="golsTime1" value="Gols Time 1:" />
 			<h:inputText id="golsTime1" value="#{jogoBean.jogo.golsTime1}"
-				required="true" />
+				required="true" requiredMessage="Campo obrigatório"/>
 
 			<h:outputLabel for="golsTime2" value="Gols Time 2:" />
 			<h:inputText id="golsTime2" value="#{jogoBean.jogo.golsTime2}"
-				required="true" />
+				required="true" requiredMessage="Campo obrigatório"/>
 
 
 			<h:outputLabel for="dataPartida" value="Data Partida:" />
-			<p:datePicker id="hora" value="#{jogoBean.jogo.dataPartida}"
+			
+			<p:datePicker id="dataPartida" value="#{jogoBean.jogo.dataPartida}"
 				showIcon="False" showButtonBar="true" showTime="true"
-				timeInput="true" />
+				timeInput="true" mindate="#{jogoBean.dataAtual}" required="true"/>
+				
+				
+			<p:commandButton value="Salvar" action="#{jogoBean.save}" icon="pi pi-check"/>
 
-			<h:commandButton value="Salvar" action="#{jogoBean.save}" />
 		</h:panelGrid>
 		<h:messages />
 	</h:form>
-
+	<h:link value="Cadastrar campeonato" outcome="cadastro_campeonato.xhtml" />
+<br></br>
 	<h:link value="Listagem" outcome="listagem.xhtml" />
-	
+<br></br>
 	<h:link value="Filtragem" outcome="filtro.xhtml" />
 
 </h:body>
